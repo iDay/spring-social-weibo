@@ -8,7 +8,7 @@
   <packaging>jar</packaging>
 
   <name>spring-social-weibo</name>
-  <url>http://code.google.com/p/spring-social-plugins/</url>
+  <url>https://github.com/iDay/spring-social-weibo</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -41,11 +41,12 @@
     </dependency>
   </dependencies>
   <organization>
-  	<url>http://www.couponornot.com</url>
-  	<name>CouponOrNot</name>
+  	<url>https://github.com/iDay</url>
+  	<name>iDay</name>
   </organization>
   <issueManagement>
-  	<url>http://code.google.com/p/spring-social-plugins/issues/list</url>
+  	<url>https://github.com/iDay/spring-social-weibo/issues</url>
+  	<system>github</system>
   </issueManagement>
   <repositories>
   	<repository>
