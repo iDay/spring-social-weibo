@@ -6,13 +6,14 @@ package org.springframework.social.weibo.api.v2;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.codehaus.jackson.JsonNode;
 import org.springframework.social.weibo.api.Favorite;
 import org.springframework.social.weibo.api.Tag;
 import org.springframework.social.weibo.api.Weibo;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.databind.JsonNode;
 
 
 /**

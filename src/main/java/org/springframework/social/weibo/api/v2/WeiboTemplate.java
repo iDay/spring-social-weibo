@@ -7,10 +7,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.weibo.api.CommentOperations;
 import org.springframework.social.weibo.api.TimelineOperations;
@@ -28,7 +27,6 @@ public class WeiboTemplate extends AbstractOAuth2ApiBinding implements Weibo {
 	private UserOperations userOperations;
 	private TimelineOperations timelineOperations;
 	private CommentOperations commentOperations;
-	private ObjectMapper objectMapper;
 
 	/**
 	 * 
@@ -81,19 +79,21 @@ public class WeiboTemplate extends AbstractOAuth2ApiBinding implements Weibo {
 	public CommentOperations commentOperations() {
 		return commentOperations;
 	}
+	
+	
 
 	@Override
-	protected MappingJacksonHttpMessageConverter getJsonMessageConverter() {
-		MappingJacksonHttpMessageConverter converter = super
+	protected MappingJackson2HttpMessageConverter getJsonMessageConverter() {
+		MappingJackson2HttpMessageConverter converter = super
 				.getJsonMessageConverter();
 		List<MediaType> list = new ArrayList<MediaType>();
 		list.addAll(converter.getSupportedMediaTypes());
 		list.add(MediaType.TEXT_PLAIN);
 		converter.setSupportedMediaTypes(list);
-
-		objectMapper = new ObjectMapper();
-		objectMapper.registerModule(new WeiboModule());
-		converter.setObjectMapper(objectMapper);
+		converter.getObjectMapper().registerModule(new WeiboModule());
+//		objectMapper = new ObjectMapper();
+//		objectMapper.registerModule(new WeiboModule());
+//		converter.setObjectMapper(objectMapper);
 		return converter;
 	}
 

@@ -5,9 +5,8 @@ package org.springframework.social.weibo.api.v1;
 
 import java.util.List;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.oauth1.AbstractOAuth1ApiBinding;
 import org.springframework.social.weibo.api.CommentOperations;
 import org.springframework.social.weibo.api.TimelineOperations;
@@ -22,7 +21,6 @@ import org.springframework.web.client.RestTemplate;
  */
 public class WeiboTemplate extends AbstractOAuth1ApiBinding implements Weibo {
 	private UserTemplate accountOperations;
-	private ObjectMapper objectMapper;
 
 	/**
 	 * 
@@ -58,14 +56,12 @@ public class WeiboTemplate extends AbstractOAuth1ApiBinding implements Weibo {
 	}
 
 	private void registerRenrenJsonModule(RestTemplate restTemplate) {
-		objectMapper = new ObjectMapper();
-		objectMapper.registerModule(new WeiboModule());
 		List<HttpMessageConverter<?>> converters = getRestTemplate()
 				.getMessageConverters();
 		for (HttpMessageConverter<?> converter : converters) {
-			if (converter instanceof MappingJacksonHttpMessageConverter) {
-				MappingJacksonHttpMessageConverter jsonConverter = (MappingJacksonHttpMessageConverter) converter;
-				jsonConverter.setObjectMapper(objectMapper);
+			if (converter instanceof MappingJackson2HttpMessageConverter) {
+				MappingJackson2HttpMessageConverter jsonConverter = (MappingJackson2HttpMessageConverter) converter;
+				jsonConverter.getObjectMapper().registerModule(new WeiboModule());
 			}
 		}
 	}

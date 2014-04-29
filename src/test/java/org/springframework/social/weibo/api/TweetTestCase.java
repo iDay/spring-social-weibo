@@ -3,39 +3,35 @@
  */
 package org.springframework.social.weibo.api;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpInputMessage;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
-import org.springframework.social.weibo.api.Tweet;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.weibo.api.json.WeiboModule;
-
 
 /**
  * @author iday
- *
+ * 
  */
 public class TweetTestCase {
-	MappingJacksonHttpMessageConverter converter;
+	MappingJackson2HttpMessageConverter converter;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		converter = new MappingJacksonHttpMessageConverter();
-		
-		ObjectMapper objectMapper = new ObjectMapper();				
-		objectMapper.registerModule(new WeiboModule());
-		converter.setObjectMapper(objectMapper);
+		converter = new MappingJackson2HttpMessageConverter();
+
+		converter.getObjectMapper().registerModule(new WeiboModule());
 	}
 
 	/**
@@ -47,23 +43,27 @@ public class TweetTestCase {
 	}
 
 	/**
-	 * Test method for {@link org.springframework.social.weibo.api.Tweet#Tweet(java.util.Date, long, java.lang.String, java.lang.String, boolean, boolean, long, long, java.lang.String, org.springframework.social.weibo.api.WeiboProfile, int, int)}.
+	 * Test method for
+	 * {@link org.springframework.social.weibo.api.Tweet#Tweet(java.util.Date, long, java.lang.String, java.lang.String, boolean, boolean, long, long, java.lang.String, org.springframework.social.weibo.api.WeiboProfile, int, int)}
+	 * .
 	 */
 	@Test
 	public void testTweet() {
 		try {
-			Tweet tweet = (Tweet) converter.read(Tweet.class, new HttpInputMessage() {
-				
-				@Override
-				public HttpHeaders getHeaders() {
-					return null;
-				}
-				
-				@Override
-				public InputStream getBody() throws IOException {
-					return this.getClass().getResourceAsStream("/tweet.json");
-				}
-			});
+			Tweet tweet = (Tweet) converter.read(Tweet.class,
+					new HttpInputMessage() {
+
+						@Override
+						public HttpHeaders getHeaders() {
+							return null;
+						}
+
+						@Override
+						public InputStream getBody() throws IOException {
+							return this.getClass().getResourceAsStream(
+									"/tweet.json");
+						}
+					});
 			assertEquals("求关注。", tweet.getText());
 			assertEquals(1404376560, tweet.getUser().getId());
 			assertNotNull(tweet.getGeo());

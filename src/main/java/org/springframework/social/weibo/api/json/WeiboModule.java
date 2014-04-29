@@ -3,12 +3,13 @@
  */
 package org.springframework.social.weibo.api.json;
 
-import org.codehaus.jackson.Version;
-import org.codehaus.jackson.map.module.SimpleModule;
 import org.springframework.social.weibo.api.Comment;
 import org.springframework.social.weibo.api.Geo;
 import org.springframework.social.weibo.api.Tweet;
 import org.springframework.social.weibo.api.WeiboProfile;
+
+import com.fasterxml.jackson.core.Version;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 
 
 
@@ -18,8 +19,13 @@ import org.springframework.social.weibo.api.WeiboProfile;
  */
 public class WeiboModule extends SimpleModule {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3348393373892814458L;
+
 	public WeiboModule() {
-		super("WeiboModule", new Version(1, 0, 0, null));
+		super("WeiboModule", new Version(1, 0, 0, null, null, null));
 	}
 
 	/* (non-Javadoc)

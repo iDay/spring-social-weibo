@@ -9,7 +9,7 @@ import java.util.List;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.oauth2.OAuth2Template;
 import org.springframework.social.support.ClientHttpRequestFactorySelector;
 import org.springframework.web.client.RestTemplate;
@@ -38,7 +38,7 @@ public class WeiboOAuth2Template extends OAuth2Template {
 		List<HttpMessageConverter<?>> converters = new ArrayList<HttpMessageConverter<?>>(
 				2);
 		converters.add(new FormHttpMessageConverter());
-		MappingJacksonHttpMessageConverter jacksonConverter = new MappingJacksonHttpMessageConverter();
+		MappingJackson2HttpMessageConverter jacksonConverter = new MappingJackson2HttpMessageConverter();
 		List<MediaType> list = new ArrayList<MediaType>();
 		list.addAll(jacksonConverter.getSupportedMediaTypes());
 		list.add(MediaType.TEXT_PLAIN);

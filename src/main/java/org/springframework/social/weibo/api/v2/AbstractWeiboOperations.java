@@ -34,7 +34,7 @@ public class AbstractWeiboOperations extends AbstractOAuth2ApiBinding {
 	
 	protected void requireAuthorization() {
 		if (!isAuthorized) {
-			throw new MissingAuthorizationException();
+			throw new MissingAuthorizationException(null);
 		}
 	}
 	

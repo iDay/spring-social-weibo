@@ -8,13 +8,12 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpInputMessage;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.weibo.api.json.WeiboModule;
 import org.springframework.social.weibo.api.v2.TweetList;
 
@@ -24,18 +23,16 @@ import org.springframework.social.weibo.api.v2.TweetList;
  *
  */
 public class TweetListTestCase {
-	MappingJacksonHttpMessageConverter converter;
+	MappingJackson2HttpMessageConverter converter;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		converter = new MappingJacksonHttpMessageConverter();
-		
-		ObjectMapper objectMapper = new ObjectMapper();				
-		objectMapper.registerModule(new WeiboModule());
-		converter.setObjectMapper(objectMapper);
+		converter = new MappingJackson2HttpMessageConverter();
+
+		converter.getObjectMapper().registerModule(new WeiboModule());
 	}
 
 	/**

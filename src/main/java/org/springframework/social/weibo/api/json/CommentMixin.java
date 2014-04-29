@@ -5,14 +5,15 @@ package org.springframework.social.weibo.api.json;
 
 import java.util.Date;
 
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.springframework.social.weibo.api.Comment;
 import org.springframework.social.weibo.api.TimelineDateDeserializer;
 import org.springframework.social.weibo.api.Tweet;
 import org.springframework.social.weibo.api.WeiboProfile;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 
 /**
